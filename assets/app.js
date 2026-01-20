@@ -464,7 +464,7 @@
     messagesEl.innerHTML = `
       <div class="drop-hint">
         <div>把对话 JSON 文件拖到这里，或点击上方 <span class="kbd">选择 JSON</span>。</div>
-        <div style="margin-top: 8px;">提示：点击上方 <span class="kbd">加载示例</span> 可查看 `examples/sample-chatgpt-export.json`（需要用本地 HTTP 服务打开）。</div>
+        <div style="margin-top: 8px;">提示：点击上方 <span class="kbd">加载示例</span> 可查看 <span class="kbd">examples/sample-chatgpt-export.json</span>（需要用本地 HTTP 服务打开）。</div>
       </div>
     `;
   }
