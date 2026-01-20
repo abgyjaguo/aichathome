@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>对话记录查看器</title>
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-title">对话记录查看器</div>
+          <div class="brand-subtitle" id="subtitle">选择或拖拽一个 JSON 文件</div>
+        </div>
+
+        <div class="controls">
+          <label class="btn btn-primary">
+            <input id="fileInput" type="file" accept=".json,application/json" />
+            选择 JSON
+          </label>
+
+          <button id="loadSampleBtn" class="btn btn-secondary" type="button">
+            加载示例
+          </button>
+
+          <input
+            id="searchInput"
+            class="input"
+            type="search"
+            placeholder="搜索（按内容）"
+            autocomplete="off"
+          />
+
+          <label class="toggle">
+            <input id="toggleSystem" type="checkbox" />
+            <span>显示 system</span>
+          </label>
+
+          <label class="toggle">
+            <input id="toggleHidden" type="checkbox" />
+            <span>显示隐藏消息</span>
+          </label>
+
+          <select id="leafSelect" class="select" title="选择分支（leaf）"></select>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="meta" class="meta hidden"></section>
+      <section id="status" class="status"></section>
+      <section id="messages" class="messages"></section>
+    </main>
+
+    <script src="assets/markdown-it.min.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
+

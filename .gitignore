@@ -1,0 +1,9 @@
+# Personal transcript exports (keep them local; do not commit)
+/*.json
+
+# Common OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+

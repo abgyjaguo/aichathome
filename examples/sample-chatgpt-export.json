@@ -1,0 +1,109 @@
+{
+  "title": "示例对话（Sample）",
+  "create_time": 1710000000.0,
+  "update_time": 1710000300.0,
+  "mapping": {
+    "root": {
+      "id": "root",
+      "message": null,
+      "parent": null,
+      "children": [
+        "sys-1"
+      ]
+    },
+    "sys-1": {
+      "id": "sys-1",
+      "message": {
+        "id": "sys-1",
+        "author": {
+          "role": "system",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": null,
+        "update_time": null,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            ""
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": true,
+        "weight": 0,
+        "metadata": {
+          "is_visually_hidden_from_conversation": true
+        },
+        "recipient": "all",
+        "channel": null
+      },
+      "parent": "root",
+      "children": [
+        "user-1"
+      ]
+    },
+    "user-1": {
+      "id": "user-1",
+      "message": {
+        "id": "user-1",
+        "author": {
+          "role": "user",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1710000001.0,
+        "update_time": null,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            "你好！请推荐 3 个适合教学的开源 AI 工具，并给出一句话简介。"
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": null,
+        "weight": 1,
+        "metadata": {},
+        "recipient": "all",
+        "channel": null
+      },
+      "parent": "sys-1",
+      "children": [
+        "assistant-1"
+      ]
+    },
+    "assistant-1": {
+      "id": "assistant-1",
+      "message": {
+        "id": "assistant-1",
+        "author": {
+          "role": "assistant",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1710000003.0,
+        "update_time": null,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            "当然可以，下面是 3 个常用的开源工具：\n\n1. **PyTorch**：主流深度学习框架，适合教学演示与研究。\n2. **JupyterLab**：交互式笔记本环境，便于课堂讲解和实验。\n3. **scikit-learn**：经典机器学习工具库，适合入门课程与作业。\n\n你想偏「入门教学」还是「深度学习进阶」？"
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": true,
+        "weight": 1,
+        "metadata": {},
+        "recipient": "all",
+        "channel": null
+      },
+      "parent": "user-1",
+      "children": []
+    }
+  },
+  "moderation_results": [],
+  "current_node": "assistant-1",
+  "conversation_id": "sample-conversation",
+  "is_archived": false,
+  "default_model_slug": "auto",
+  "__fetched_at": "2026-01-20T00:00:00.000Z"
+}
+
