@@ -27,6 +27,23 @@ python -m http.server 8000
 http://localhost:8000/
 ```
 
+## 上传到 GitHub（可选）
+
+1. 在 GitHub 上新建一个空仓库（不要勾选初始化 README/License）
+2. 在本地执行：
+
+```bash
+git remote add origin https://github.com/<YOUR_NAME>/<REPO>.git
+git push -u origin main
+```
+
+如果你更喜欢用脚本（需要 `GITHUB_TOKEN`）：
+
+```powershell
+$env:GITHUB_TOKEN="YOUR_TOKEN"
+.\scripts\publish_github.ps1 -RepoName "your-repo-name"
+```
+
 ## 隐私
 
 建议不要把你自己的对话导出 JSON 提交到 Git 仓库或上传到公开网络。本项目已在 `.gitignore` 中默认忽略根目录下的 `*.json` 文件。
@@ -35,4 +52,3 @@ http://localhost:8000/
 
 - 本项目：MIT（见 `LICENSE`）
 - 第三方依赖：见 `THIRD_PARTY_NOTICES.md`
-
