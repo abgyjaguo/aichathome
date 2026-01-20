@@ -8,7 +8,8 @@
 - 显示/隐藏被标记为“视觉隐藏”的消息
 - 多分支对话：支持选择不同 `leaf` 分支
 
-  ![Uploading image.png…]()
+<img width="1113" height="911" alt="image" src="https://github.com/user-attachments/assets/e7f91271-e560-42cf-97d4-c3a4d70fb138" />
+
 
 
 ## 快速开始
