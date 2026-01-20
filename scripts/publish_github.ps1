@@ -43,8 +43,20 @@ $headers = @{
   "User-Agent"         = "chatgpt-export-viewer"
 }
 
+Write-Host "Fetching GitHub user ..."
+$user = Invoke-RestMethod -Method Get -Uri "https://api.github.com/user" -Headers $headers
+$owner = $user.login
+if (-not $owner) {
+  throw "GitHub API did not return user login"
+}
+
 Write-Host "Creating GitHub repo: $RepoName (private=$([bool]$Private)) ..."
-$repo = Invoke-RestMethod -Method Post -Uri "https://api.github.com/user/repos" -Headers $headers -Body $body
+try {
+  $repo = Invoke-RestMethod -Method Post -Uri "https://api.github.com/user/repos" -Headers $headers -Body $body
+} catch {
+  Write-Host "Create failed, trying to fetch existing repo: $owner/$RepoName"
+  $repo = Invoke-RestMethod -Method Get -Uri "https://api.github.com/repos/$owner/$RepoName" -Headers $headers
+}
 
 $remoteUrl = $repo.clone_url
 if (-not $remoteUrl) {
@@ -53,15 +65,39 @@ if (-not $remoteUrl) {
 
 Write-Host "Remote: $remoteUrl"
 
-$existing = git remote get-url origin 2>$null
-if ($LASTEXITCODE -eq 0 -and $existing) {
+if ((git rev-parse --verify HEAD 2>$null) -and $LASTEXITCODE -eq 0) {
+  # ok
+} else {
+  throw "This repository has no commits. Commit something first, then run again."
+}
+
+$currentBranch = (git rev-parse --abbrev-ref HEAD).Trim()
+if ($currentBranch -ne "main") {
+  Write-Host "Renaming branch '$currentBranch' to 'main'"
+  git branch -M main | Out-Null
+}
+
+$remotes = @(git remote)
+if ($remotes -contains "origin") {
   git remote set-url origin $remoteUrl | Out-Null
 } else {
   git remote add origin $remoteUrl | Out-Null
 }
 
+if ($remoteUrl -match "^https://github\\.com/([^/]+)/([^/]+)\\.git$") {
+  $owner = $matches[1]
+  $repoSlug = $matches[2]
+} else {
+  $repoSlug = $RepoName
+}
+
+$escaped = [uri]::EscapeDataString($token)
+$pushUrl = "https://x-access-token:$escaped@github.com/$owner/$repoSlug.git"
+git remote set-url --push origin $pushUrl | Out-Null
+
 Write-Host "Pushing branch: main"
 git push -u origin main
 
-Write-Host "Done: $($repo.html_url)"
+git remote set-url --push origin $remoteUrl | Out-Null
 
+Write-Host "Done: $($repo.html_url)"
